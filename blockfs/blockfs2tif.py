@@ -56,7 +56,7 @@ def write_plane(shm, path, z, compression):
         # More than 31 bits? Time to use bigtiff
         n_bits= np.log(m.dtype.itemsize * np.prod(m[z].shape)) / np.log(2)
         bigtiff =  n_bits > 31
-        tifffile.imsave(path, m[z], compress=compression, bigtiff=bigtiff)
+        tifffile.imwrite(path, m[z], compression="zlib", bigtiff=bigtiff, ccompressionargs={'level': compression})
 
 
 def main(args=sys.argv[1:]):
